@@ -18,10 +18,10 @@ view = view_map[view_name]
 
 camera_serial = 49045152
 camera_position_map = {
-    41182735: "front",
-    49429257: "right",
-    44377151: "left",
-    49045152: "top"
+    41182735: "view1", # front
+    49429257: "view2", # right
+    44377151: "view3", # left
+    49045152: "view4"  # top
 }
 camera_position = camera_position_map.get(camera_serial, "unknown")
 
@@ -78,6 +78,8 @@ if view_name == "leftcam":
 else:
     camera_matrix = camera_right_matrix
     dist_coeffs = dist_right_coeffs
+
+dist_coeffs_for_calc = np.zeros((5, 1))
 
 print("실행 중... ESC로 종료")
 marker_size = 0.05
@@ -154,8 +156,8 @@ while True:
                 cv2.circle(frame_undistorted, bottomLeftPoint, 4, blue_BGR, -1)
 
                 # PnP로 포즈 추정
-                ret, rvec, tvec = cv2.solvePnP(marker_3d_edges, corner, camera_matrix, dist_coeffs, flags=cv2.SOLVEPNP_ITERATIVE)
-                rvec, tvec = cv2.solvePnPRefineLM(marker_3d_edges, corner, camera_matrix, dist_coeffs, rvec, tvec)
+                ret, rvec, tvec = cv2.solvePnP(marker_3d_edges, corner, camera_matrix, dist_coeffs_for_calc, flags=cv2.SOLVEPNP_ITERATIVE)
+                rvec, tvec = cv2.solvePnPRefineLM(marker_3d_edges, corner, camera_matrix, dist_coeffs_for_calc, rvec, tvec)
 
                 if ret:
                     curr_quat = R.from_rotvec(rvec.flatten()).as_quat()
@@ -205,7 +207,7 @@ while True:
                                 0.5, (0, 0, 255), 2)
 
                     # 좌표축 표시 (EMA 적용된 포즈로)
-                    cv2.drawFrameAxes(frame_undistorted, camera_matrix, dist_coeffs,
+                    cv2.drawFrameAxes(frame_undistorted, camera_matrix, dist_coeffs_for_calc,
                                     rvec_filtered, tvec_filtered, marker_size/2)
 
         
