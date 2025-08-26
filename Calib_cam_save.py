@@ -1,17 +1,16 @@
 import os
 import json
 import configparser
-import pyzed.sl as sl
 
 # 시리얼 ↔ 위치 매핑
 camera_list = {
-    41182735: "front",
-    49429257: "right",
-    44377151: "left",
-    49045152: "top"
+    41182735: "view1", # front # marker 1, 2, 4, 5, 6
+    49429257: "view2", # right # marker 2, 4, 7, 8
+    44377151: "view3", # left  # marker 3, 5, 7, 8
+    49045152: "view4"  # top   # marker 1, 2, 4, 6, 7, 8
 }
 
-zed_conf_dir = "/home/zed_box/Documents/Auto_Needle_Insertion_System/camera_conf"
+zed_conf_dir = "/home/najo/NAS/DIP/Panda_cap_make_dataset/settings"
 output_dir = "./Calib_cam_from_conf"
 os.makedirs(output_dir, exist_ok=True)
 def load_fhd_calibration(conf_path, side):
@@ -21,7 +20,7 @@ def load_fhd_calibration(conf_path, side):
     with open(conf_path, "r", encoding="utf-8-sig") as f:
         config.read_file(f)
 
-    section = f"{side.upper()}_CAM_FHD"
+    section = f"{side.upper()}_CAM_FHD1200"
     adv_section = f"{side.upper()}_DISTO"
 
     cam = config[section]
