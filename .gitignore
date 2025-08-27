@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+Panda_dataset/
+
 # Distribution / packaging
 .Python
 build/
