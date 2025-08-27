@@ -9,7 +9,7 @@ timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 save_path = "/home/zed_box/Documents/ZED_Cap_make_dataset/ArUco_cap"
 
-view_name = "leftcam"  
+view_name = "rightcam"  
 view_map = {
     "leftcam": sl.VIEW.LEFT,
     "rightcam": sl.VIEW.RIGHT

@@ -10,7 +10,7 @@ camera_list = {
     49045152: "view4"  # top   # marker 1, 2, 4, 6, 7, 8
 }
 
-zed_conf_dir = "/home/najo/NAS/DIP/Panda_cap_make_dataset/settings"
+zed_conf_dir = "./settings"
 output_dir = "./Calib_cam_from_conf"
 os.makedirs(output_dir, exist_ok=True)
 def load_fhd_calibration(conf_path, side):
