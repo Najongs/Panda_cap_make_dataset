@@ -5,8 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
-
-ArUco_dataset_10-15th/
+Panda_dataset.zip
+Panda_dataset*/
+ArUco_dataset_10-20th/
+Panda_dataset_10-20th/
 Panda_dataset_1-9th/
 ArUco_dataset_1-9th/
 Panda_dataset_ex1/
