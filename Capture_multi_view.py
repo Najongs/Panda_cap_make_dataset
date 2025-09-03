@@ -60,13 +60,16 @@ class ZedCamera(threading.Thread):
 
                 left_data = left_image.get_data()
                 right_data = right_image.get_data()
-
+                
+                timestamp2 = time.time()
                 left_path = os.path.join(self.output_dir, f"zed_{self.serial_number}_left_{timestamp_str}.jpg")
                 right_path = os.path.join(self.output_dir, f"zed_{self.serial_number}_right_{timestamp_str}.jpg")
 
                 success_left = cv2.imwrite(left_path, left_data[:, :, :3])
                 success_right = cv2.imwrite(right_path, right_data[:, :, :3])
-
+                
+                print(f'Time delay {timestamp2-timestamp}')
+                
                 if not (success_left and success_right):
                     print(f"Camera {self.serial_number} - Failed to save images at {timestamp:.3f}")
             
